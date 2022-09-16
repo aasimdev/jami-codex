@@ -129,28 +129,6 @@ var routes = [
     layout: "/admin",
     visible: false
   },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   {
     path: "/icons",
     name: "Icons",

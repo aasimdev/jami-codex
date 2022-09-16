@@ -33,6 +33,17 @@
 .form-control[readonly]{
     color: #fff;
 }
+.card-title{
+    display: flex;
+    align-items: center;
+    a{
+        font-size: 25px;
+        margin-right: 15px;
+    }
+}
+.userCheckList{
+    
+}
 .theme-tabs{
     .nav-pills{
         justify-content: center;

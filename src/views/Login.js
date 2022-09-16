@@ -42,7 +42,8 @@ const Login = () => {
                     localStorage.setItem("email", res.data.data.email);
                     localStorage.setItem("id", res.data.data.id);
                     localStorage.setItem(ACCESS_TOKEN_NAME, res.data.data.token);
-                    
+                    localStorage.setItem("is_admin", res.data.data.is_admin);
+
                     history.push('/admin/dashboard');
                 }
                 else {

@@ -25,6 +25,7 @@ const Users = () => {
                 'Content-Type': 'application/json'
             }
         }).then(res => {
+            console.log(res);
             setUsers(res.data.data);
 
         }).catch(function (error) {
@@ -63,25 +64,25 @@ const Users = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {users ? 
-                                    users.map((user, index) => {
-                                        return(
-                                            <tr key={index}>
-                                            <td>{user.firstname + '' + user.lastname}</td>
-                                            <td>{user.email}</td>
-                                            <td>{user.email}</td>
-                                            <td>
-                                                <div className='tableActions'>
-                                                    <Link to="edit-role"><i class="fa-solid fa-pencil"></i></Link>
-                                                    <a href="#"><i class="fa-solid fa-trash-can"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        )
-                                    })
-                                    : "Record not found"}
-                                 
-                               
+                                    {users ?
+                                        users.map((user, index) => {
+                                            return (
+                                                <tr key={index}>
+                                                    <td>{user.firstname + '' + user.lastname}</td>
+                                                    <td>{user.email}</td>
+                                                    <td>{user.role ? user.role : "N/A" }</td>
+                                                    <td>
+                                                        <div className='tableActions'>
+                                                            <Link to="edit-role"><i class="fa-solid fa-pencil"></i></Link>
+                                                            <a href="#"><i class="fa-solid fa-trash-can"></i></a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })
+                                        : "Record not found"}
+
+
 
                                 </tbody>
                             </Table>

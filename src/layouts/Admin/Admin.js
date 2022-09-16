@@ -78,6 +78,8 @@ function Admin(props) {
     document.documentElement.classList.toggle("nav-open");
     setsidebarOpened(!sidebarOpened);
   };
+
+
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.layout === "/admin") {
@@ -93,6 +95,9 @@ function Admin(props) {
       }
     });
   };
+
+
+
   const getBrandText = (path) => {
     for (let i = 0; i < routes.length; i++) {
       if (location.pathname.indexOf(routes[i].layout + routes[i].path) !== -1) {
@@ -106,6 +111,8 @@ function Admin(props) {
       {({ color, changeColor }) => (
         <React.Fragment>
           <div className="wrapper">
+
+
             <Sidebar
               routes={routes}
               logo={{
@@ -115,6 +122,9 @@ function Admin(props) {
               }}
               toggleSidebar={toggleSidebar}
             />
+
+
+
             <div className="main-panel" ref={mainPanelRef} data={color}>
               <AdminNavbar
                 brandText={getBrandText(location.pathname)}
