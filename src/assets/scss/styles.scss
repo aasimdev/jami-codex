@@ -1,62 +1,73 @@
-.loginWrap{
+.loginWrap {
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
 }
-.accountMain{
-    &__header{
+
+.accountMain {
+    &__header {
         text-align: center;
         margin-bottom: 36px;
     }
 }
-.accTitle{
+
+.accTitle {
     display: block;
     color: #fff;
     text-align: right;
-    a{
+
+    a {
         color: #fff;
     }
 }
-.tableActions{
+
+.tableActions {
     a {
         font-size: 17px;
-        & + a{
+
+        &+a {
             margin-left: 20px;
         }
     }
 }
-.cardHeightFix{
-    min-height: calc(100vh - 210px);
-}
 
-.form-control[readonly]{
+// .cardHeightFix {
+//     min-height: calc(100vh - 210px);
+// }
+
+.form-control[readonly] {
     color: #fff;
 }
-.card-title{
+
+.card-title {
     display: flex;
     align-items: center;
-    a{
+
+    a {
         font-size: 25px;
         margin-right: 15px;
     }
 }
-.userCheckList{
-    
-}
-.theme-tabs{
-    .nav-pills{
+
+.userCheckList {}
+
+.theme-tabs {
+    .nav-pills {
         justify-content: center;
         margin-bottom: 24px;
-        .nav-item{
-            &+  .nav-item{
+
+        .nav-item {
+            &+.nav-item {
                 margin-left: 16px;
             }
-            .nav-link{
+
+            .nav-link {
                 cursor: pointer;
                 border: 0;
                 color: #ffffff;
-                &.active{
+
+                &.active {
                     background: #38AC32;
                     background-image: linear-gradient(90deg, #38AC32 0%, #7FBB29 100%);
                     background-color: #38AC32;
@@ -67,4 +78,13 @@
             }
         }
     }
+}
+
+p {
+    font-weight: 400;
+}
+
+.sidebar .nav li>a,
+.off-canvas-sidebar .nav li>a {
+    font-size: 14px;
 }

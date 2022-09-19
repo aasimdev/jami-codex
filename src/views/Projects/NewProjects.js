@@ -21,8 +21,9 @@ import {
 const NewRole = () => {
 
     const [state, setState] = useState('');
-
+    const userID = localStorage.getItem('id');
     let history = useHistory();
+
 
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -37,7 +38,8 @@ const NewRole = () => {
         'name': state.name,
         'start_date': state.start_date,
         'end_date': state.end_date,
-        'status': state.status
+        'status': state.status,
+        "created_by": userID
     }
 
     const handleSubmitClick = (e) => {

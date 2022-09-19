@@ -2,6 +2,7 @@ import axios from 'axios';
 import { API_BASE_URL } from 'const/apiConst';
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 // reactstrap components
 import {
     Card,
@@ -41,7 +42,30 @@ const Users = () => {
         }
 
         return () => { unmounted = true };
-    }, [])
+    }, []);
+
+
+
+
+    // const handleDelete = (id) => {
+    //     const payload = {
+    //         'user_id': id
+    //     }
+    //     axios.post(API_BASE_URL + 'api/user/delete', payload)
+    //         .then(function (res) {
+    //             if (res.status === 200) {
+    //                 // fetchData();
+    //                 toast.success("Record has been deleted");
+    //             }
+    //         })
+    //         .catch(function (error) {
+    //             toast.error("Something is wrong");
+    //             console.log(error);
+    //         });
+    // }
+
+
+
 
 
     return (
@@ -68,9 +92,9 @@ const Users = () => {
                                         users.map((user, index) => {
                                             return (
                                                 <tr key={index}>
-                                                    <td>{user.firstname + '' + user.lastname}</td>
+                                                    <td>{user.firstname + ' ' + user.lastname}</td>
                                                     <td>{user.email}</td>
-                                                    <td>{user.role ? user.role : "N/A" }</td>
+                                                    <td>{user.role ? user.role : "N/A"}</td>
                                                     <td>
                                                         <div className='tableActions'>
                                                             <Link to="edit-role"><i class="fa-solid fa-pencil"></i></Link>

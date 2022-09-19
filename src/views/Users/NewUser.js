@@ -251,88 +251,9 @@ const NewUser = () => {
                                     <Row>
                                         <Col md="6">
                                             <FormGroup>
-                                                <label>First Name</label>
-                                                <Input
-                                                    type="text"
-                                                />
-                                            </FormGroup>
-                                        </Col>
-                                        <Col md="6">
-                                            <FormGroup>
-                                                <label>Last Name</label>
-                                                <Input
-                                                    type="text"
-                                                />
-                                            </FormGroup>
-                                        </Col>
-                                        <Col md="6">
-                                            <FormGroup>
                                                 <label>Email</label>
                                                 <Input
                                                     type="email"
-                                                />
-                                            </FormGroup>
-                                        </Col>
-                                        <Col md="6">
-                                            <FormGroup>
-                                                <label>Username</label>
-                                                <Input
-                                                    type="username"
-                                                />
-                                            </FormGroup>
-                                        </Col>
-                                        <Col md="6">
-                                            <FormGroup>
-                                                <label htmlFor="designation">
-                                                    Designation
-                                                </label>
-                                                <Input
-                                                    id="designation"
-                                                    name="select"
-                                                    type="select"
-                                                >
-                                                    <option>
-                                                        Editor
-                                                    </option>
-                                                    <option>
-                                                        Maintenance
-                                                    </option>
-                                                    <option>
-                                                        QA
-                                                    </option>
-                                                </Input>
-                                            </FormGroup>
-                                        </Col>
-                                        <Col md="6">
-                                            <FormGroup>
-                                                <label>Phone</label>
-                                                <Input
-                                                    type="tel"
-                                                />
-                                            </FormGroup>
-                                        </Col>
-                                        <Col md="6">
-                                            <FormGroup>
-                                                <label>Country</label>
-                                                <Input
-                                                    type="text"
-                                                />
-                                            </FormGroup>
-                                        </Col>
-
-                                        <Col md="6">
-                                            <FormGroup>
-                                                <label>Country Code</label>
-                                                <Input
-                                                    type="text"
-                                                />
-                                            </FormGroup>
-                                        </Col>
-                                        <Col md="6">
-                                            <FormGroup>
-                                                <label>Password</label>
-                                                <Input
-                                                    type="password"
                                                 />
                                             </FormGroup>
                                         </Col>
