@@ -36,14 +36,20 @@ const Login = () => {
 
         axios.post(API_BASE_URL + 'api/user/signin', payload)
             .then(function (res) {
+                console.log(res);
                 if (res.status === 200) {
                     localStorage.setItem("name", res.data.data.firstname);
                     localStorage.setItem("email", res.data.data.email);
                     localStorage.setItem("id", res.data.data.id);
                     localStorage.setItem(ACCESS_TOKEN_NAME, res.data.data.token);
                     localStorage.setItem("is_admin", res.data.data.is_admin);
-                    history.push('/admin/dashboard');
+                    if (res.data.data.is_admin == 1) {
+                        history.push('/admin/dashboard');
+                    } else {
+                        history.push('/user/dashboard');
+                    }
                     window.location.reload();
+
                 }
                 else {
                     history.push('/');

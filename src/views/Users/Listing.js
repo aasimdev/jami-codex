@@ -92,11 +92,16 @@ const Users = () => {
                                         users.map((user, index) => {
                                             return (
                                                 <tr key={index}>
-                                                    <td>{user.firstname + ' ' + user.lastname}</td>
+                                                    <td>
+                                                        <Link to={`/admin/user-detail/${user.id}`} className="detailLink">
+                                                            {user.firstname + ' ' + user.lastname}
+                                                        </Link>
+                                                    </td>
                                                     <td>{user.email}</td>
                                                     <td>{user.role ? user.role : "N/A"}</td>
                                                     <td>
                                                         <div className='tableActions'>
+                                                            <a href="#"><i class="fa-solid fa-user-plus"></i></a>
                                                             <Link to="edit-role"><i class="fa-solid fa-pencil"></i></Link>
                                                             <a href="#"><i class="fa-solid fa-trash-can"></i></a>
                                                         </div>

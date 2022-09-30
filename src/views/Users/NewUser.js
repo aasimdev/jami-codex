@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { API_BASE_URL } from 'const/apiConst';
 import { func } from 'prop-types';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -27,6 +27,7 @@ import {
 
 const NewUser = () => {
     const [activeTab, setActiveTab] = useState('1');
+    const [roles, setRoles] = useState([]);
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
@@ -46,6 +47,40 @@ const NewUser = () => {
         var getUsername = email.split("@")[0];
         setUsername(getUsername);
     }
+
+
+    // Roles
+
+    const fetchData = () => {
+        axios({
+            method: 'GET',
+            url: API_BASE_URL + 'api/role/list',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            if (res.status === 200) {
+                console.log(res.data.data);
+                setRoles(res.data.data)
+            } else {
+                console.log('Some error ocurred');
+            }
+        }).catch(e => {
+            console.log('Error');
+        })
+    }
+
+    useEffect(() => {
+        let unmounted = false;
+
+        if (!unmounted) {
+            fetchData();
+        }
+
+        return () => { unmounted = true };
+    }, [])
+
+
 
 
 
@@ -183,15 +218,13 @@ const NewUser = () => {
                                                     <option>
                                                         Please select
                                                     </option>
-                                                    <option value="1">
-                                                        QA
-                                                    </option>
-                                                    <option value="2">
-                                                        Editor
-                                                    </option>
-                                                    <option value="3">
-                                                        Maintenance
-                                                    </option>
+                                                    {roles && roles.map((role) => {
+                                                        return (
+                                                            <option value={role.name} key={role.id}>
+                                                                {role.name}
+                                                            </option>
+                                                        )
+                                                    })}
                                                 </Input>
                                             </FormGroup>
                                         </Col>
@@ -255,6 +288,30 @@ const NewUser = () => {
                                                 <Input
                                                     type="email"
                                                 />
+                                            </FormGroup>
+                                        </Col>
+                                        <Col md="6">
+                                            <FormGroup>
+                                                <label htmlFor="designation">
+                                                    Designation
+                                                </label>
+                                                <Input
+                                                    id="designation"
+                                                    type="select"
+                                                    value={designation}
+                                                    onChange={(e) => setDesignation(e.target.value)}
+                                                >
+                                                    <option>
+                                                        Please select
+                                                    </option>
+                                                    {roles && roles.map((role) => {
+                                                        return (
+                                                            <option value={role.name} key={role.id}>
+                                                                {role.name}
+                                                            </option>
+                                                        )
+                                                    })}
+                                                </Input>
                                             </FormGroup>
                                         </Col>
                                     </Row>

@@ -88,3 +88,40 @@ p {
 .off-canvas-sidebar .nav li>a {
     font-size: 14px;
 }
+
+.selectThemeTwo {
+    .select__control {
+        background-color: transparent;
+        border-color: #2b3553;
+        border-radius: 0.4285rem;
+        font-size: 0.7500000025rem;
+        padding-left: 10px;
+        &:hover{
+            border-color: #2b3553;
+        }
+    }
+    .select__input-container, .select__single-value{
+        color: #fff;
+    }
+    .select__option{
+        color: #000;
+    }
+}
+
+.table{
+    td{
+        .detailLink{
+            color: #fff;
+            font-weight: 700;
+        }
+    }
+}
+
+.detaildata{
+    .form-control[readonly]{
+        background-color: transparent;
+        cursor: initial;
+        border: 0;
+        padding-left: 0;
+    }
+}

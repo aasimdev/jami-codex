@@ -90,12 +90,21 @@ function Admin(props) {
             key={key}
           />
         );
-      } else {
+      } else if (prop.layout === "/user") {
+        return (
+          <Route
+            path={prop.layout + prop.path}
+            component={prop.component}
+            key={key}
+          />
+        )
+
+      }
+      else {
         return null;
       }
     });
   };
-
 
 
   const getBrandText = (path) => {
@@ -106,6 +115,8 @@ function Admin(props) {
     }
     return "Brand";
   };
+
+
   return (
     <BackgroundColorContext.Consumer>
       {({ color, changeColor }) => (
@@ -131,6 +142,7 @@ function Admin(props) {
                 toggleSidebar={toggleSidebar}
                 sidebarOpened={sidebarOpened}
               />
+              
               <Switch>
                 {getRoutes(routes)}
                 {/* <Redirect from="*" to="/admin/dashboard" /> */}

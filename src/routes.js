@@ -33,6 +33,7 @@ import UserProfile from "views/UserProfile.js";
 import Users from "views/Users/Listing";
 import NewUser from "views/Users/NewUser";
 import EditUser from "views/Users/EditUser";
+import UserDetail from "views/Users/UserDetail";
 
 
 var routes = [];
@@ -52,8 +53,8 @@ if (isAdmin == 1) {
 
     {
       path: "/role",
-      name: "Role",
-      rtlName: "Role",
+      name: "Roles",
+      rtlName: "Roles",
       icon: "tim-icons icon-badge",
       component: Role,
       layout: "/admin",
@@ -109,12 +110,21 @@ if (isAdmin == 1) {
 
     {
       path: "/users",
-      name: "Invite User",
-      rtlName: "Invite User",
-      icon: "tim-icons icon-spaceship",
+      name: "Users",
+      rtlName: "Users",
+      icon: "tim-icons icon-single-02",
       component: Users,
       layout: "/admin",
       visible: true
+    },
+    {
+      path: "/user-detail/:id",
+      name: "user-detail",
+      rtlName: "Users",
+      icon: "tim-icons icon-single-02",
+      component: UserDetail,
+      layout: "/admin",
+      visible: false
     },
 
     {
@@ -206,7 +216,7 @@ if (isAdmin == 1) {
       rtlName: "لوحة القيادة",
       icon: "tim-icons icon-chart-pie-36",
       component: Dashboard,
-      layout: "/admin",
+      layout: "/user",
       visible: true
     },
 
@@ -216,7 +226,7 @@ if (isAdmin == 1) {
       rtlName: "Projects",
       icon: "tim-icons icon-app",
       component: Projects,
-      layout: "/admin",
+      layout: "/user",
       visible: true
     }
   ];

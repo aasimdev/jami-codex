@@ -18,7 +18,8 @@ import {
     FormGroup,
     Input,
     Label,
-    Form
+    Form,
+    UncontrolledTooltip
 } from "reactstrap";
 import axios from 'axios';
 import UserProjects from './User/Listing';
@@ -123,6 +124,7 @@ const Projects = () => {
                 'Content-Type': 'application/json'
             }
         }).then(res => {
+            console.log(res);
             setUserLists(res.data.data);
 
         }).catch(function (error) {
@@ -189,7 +191,7 @@ const Projects = () => {
                 if (res.status === 200) {
                     setProjectDetailToggle(true);
                     setProjectDetail(res.data.data);
-                    
+
                 }
             })
             .catch(function (error) {
@@ -293,7 +295,7 @@ const Projects = () => {
                                             </thead>
                                             <tbody>
                                                 {projectDetail && projectDetail.map((item) => {
-                                                    
+
                                                     return (
                                                         <tr>
                                                             <td>{item.firstname + ' ' + item.lastname}</td>
@@ -308,7 +310,7 @@ const Projects = () => {
                                         </Table>
                                     </CardBody>
                                 </Card>
-                                
+
                                 :
                                 <Card>
                                     <CardHeader>
@@ -352,7 +354,7 @@ const Projects = () => {
                                 </Card>
                             // User Porject List
                             :
-                           <UserProjects />
+                            <UserProjects />
                     }
                 </Col>
             </Row>
@@ -363,21 +365,41 @@ const Projects = () => {
                 <ModalBody>
                     <h6>User</h6>
 
-                    <div className='userCheckList'>
-                        {userLists && userLists.map((user) => {
-                            return (
-                                <FormGroup check key={user.id}>
-                                    <Label check>
-                                        <Input defaultValue={user.id} name={user.id} type="checkbox" onChange={handleCheck} />
-                                        <span className="form-check-sign">
-                                            <span className="check" />
-                                            {user.firstname + " " + user.lastname}
-                                        </span>
-                                    </Label>
-                                </FormGroup>
-                            )
-                        })}
+                    <div className='userCheckList card-tasks h-auto'>
+                        <div className="table-full-width table-responsive">
+                            <Table>
+                                <tbody>
+                                    {userLists && userLists.map((user) => {
+                                        return (
 
+
+                                            <tr>
+                                                <td>
+                                                    <FormGroup check key={user.id}>
+                                                        <Label check>
+                                                            <Input defaultValue={user.id} name={user.id} type="checkbox" onChange={handleCheck} />
+                                                            <span className="form-check-sign">
+                                                                <span className="check" />
+
+                                                            </span>
+                                                        </Label>
+                                                    </FormGroup>
+                                                </td>
+                                                <td>
+                                                    <p className="title">{user.firstname + " " + user.lastname}</p>
+                                                </td>
+                                                <td>
+                                                    <p className="title">{user.email}</p>
+                                                </td>
+                                            </tr>
+
+
+                                        )
+                                    })}
+
+                                </tbody>
+                            </Table>
+                        </div>
                     </div>
                     <FormGroup>
                         <Input type="hidden" value={projectID} />

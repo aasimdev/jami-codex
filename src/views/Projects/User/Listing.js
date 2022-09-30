@@ -21,7 +21,8 @@ import {
     Form
 } from "reactstrap";
 import axios from 'axios';
-import { data } from 'jquery';
+import Moment from 'react-moment';
+import moment from 'moment'
 
 const UserProjects = () => {
 
@@ -33,7 +34,16 @@ const UserProjects = () => {
     const [state, setState] = useState('');
     const [projectDate, setProjectDate] = useState('');
 
-    // const [handleChange]
+    const [available, setAvailable] = useState('');
+    const [goal, setGoal] = useState('');
+    const [taskStatus, setTaskStatus] = useState('');
+    const [taskDetail, setTaskDetail] = useState('');
+    const [taskdate, setTaskdate] = useState('');
+    const [startTimeField, setStartTimeField] = useState('');
+    const [endTimeField, setEndTimeField] = useState('');
+    const [taskTotalTime, setTaskTotalTime] = useState('');
+    const [comment, setComment] = useState('');
+    const [endDateB, setEndDateB] = useState(false);
 
     const userID = localStorage.getItem('id');
 
@@ -44,6 +54,9 @@ const UserProjects = () => {
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
     today = yyyy + '-' + mm + '-' + dd;
+
+
+
 
 
 
@@ -68,6 +81,7 @@ const UserProjects = () => {
     }
 
     useEffect(() => {
+
         let unmounted = false;
 
         if (!unmounted) {
@@ -125,10 +139,71 @@ const UserProjects = () => {
 
     const handleChange = (e) => {
         const { id, value } = e.target;
-        setState((prevState) => ({
-            ...prevState,
-            [id]: value
-        }))
+        // setState((prevState) => ({
+        //     ...prevState,
+        //     [id]: value
+        // }))
+
+        // if (id == "end_time") {
+        //     var startTime = startTimeField;
+        //     var endTime = endTimeField;
+        //     var tTime = "24:00:00";
+        //     var startDiff = "";
+        //     var endDiff = "";
+        //     var totalTimeDiff = "";
+        //     function getTimeDiff(start, end) {
+        //         return moment.duration(moment(end, "HH:mm:ss a").diff(moment(start, "HH:mm:ss a")));
+        //     }
+        //     if (startTime > "13:00" && (endTime > "00:00" && endTime < "12:00")) {
+        //         startDiff = moment.duration(moment(tTime, 'HH:mm:ss a').diff(moment(startTime, 'HH:mm:ss a')));
+        //         endDiff = moment.duration(moment(endTime, "HH:mm:ss a").diff(moment("00:00:00", "HH:mm:ss a")));
+        //         totalTimeDiff = moment.duration(startDiff, 'HH:mm:ss a').add(moment.duration(endDiff, 'HH:mm:ss a'));
+        //         setTaskTotalTime(`${totalTimeDiff.hours()} hours ${totalTimeDiff.minutes()} minutes`);
+        //     } else {
+        //         var diff = getTimeDiff(startTime, endTime)
+        //         setTaskTotalTime(`${diff.hours()} hours ${diff.minutes()} minutes`);
+        //     }
+        // }
+
+
+
+
+    }
+
+    function getTimeDiff(start, end) {
+        return moment.duration(moment(end, "HH:mm:ss a").diff(moment(start, "HH:mm:ss a")));
+    }
+
+    const handleEndTime = (e) => {
+        setEndTimeField(e.target.value);
+    }
+
+    const handleBlur = () => {
+
+        var startTime = startTimeField;
+        var endTime = endTimeField;
+        var tTime = "24:00:00";
+        var startDiff = "";
+        var endDiff = "";
+        var totalTimeDiff = "";
+
+        if (startTime > "13:00" && (endTime > "00:00" && endTime < "12:00")) {
+            startDiff = moment.duration(moment(tTime, 'HH:mm:ss a').diff(moment(startTime, 'HH:mm:ss a')));
+            endDiff = moment.duration(moment(endTime, "HH:mm:ss a").diff(moment("00:00:00", "HH:mm:ss a")));
+            totalTimeDiff = moment.duration(startDiff, 'HH:mm:ss a').add(moment.duration(endDiff, 'HH:mm:ss a'));
+            setTaskTotalTime(`${totalTimeDiff.hours()} hours ${totalTimeDiff.minutes()} minutes`);
+        } else {
+            var diff = getTimeDiff(startTime, endTime)
+            setTaskTotalTime(`${diff.hours()} hours ${diff.minutes()} minutes`);
+        }
+    }
+
+
+    const handleTotalTime = () => {
+
+        // var myStart = "01:40:00 am";
+        // var myEnd = "05:20:07 am";
+
     }
 
 
@@ -151,13 +226,15 @@ const UserProjects = () => {
     // Add Project Detail
     const handleAddProjectDetail = (e) => {
         e.preventDefault();
+        console.log(parseInt(state.end_time) - parseInt(state.start_time));
+        return false;
         axios.post(API_BASE_URL + 'api/project-detail/create', payload)
             .then(function (res) {
                 if (res.status === 200) {
                     toast.success("New project Detail has been added");
                     setAddProjectDetailModal(!addProjectDetailModal);
                     userProjectFetchData();
-                    window.location.reload();
+                    // window.location.reload();
                 }
             })
             .catch(function (error) {
@@ -184,7 +261,7 @@ const UserProjects = () => {
                                         <thead className="text-primary">
                                             <tr>
                                                 <th>Date</th>
-                                                <th>Goal</th>
+                                                <th>Task</th>
                                                 <th>Task Detail</th>
                                                 <th>Task Status</th>
                                                 <th>Comment</th>
@@ -264,8 +341,8 @@ const UserProjects = () => {
                         <Input
                             type="select"
                             id="is_available"
-                            value={state.is_available}
-                            onChange={handleChange}
+                            value={available}
+                            onChange={(e) => (setAvailable(e.target.value))}
                         >
                             <option>Please select</option>
                             <option value="0">Leave</option>
@@ -279,8 +356,8 @@ const UserProjects = () => {
                                 <Input
                                     type="text"
                                     id='goal'
-                                    value={state.goal}
-                                    onChange={handleChange}
+                                    value={goal}
+                                    onChange={(e) => (setGoal(e.target.value))}
                                 />
                             </FormGroup>
                         </Col>
@@ -290,8 +367,8 @@ const UserProjects = () => {
                                 <Input
                                     type="select"
                                     id="task_status"
-                                    value={state.task_status}
-                                    onChange={handleChange}
+                                    value={taskStatus}
+                                    onChange={(e) => (setTaskStatus(e.target.value))}
                                 >
                                     <option>To do</option>
                                     <option>In progress</option>
@@ -302,43 +379,51 @@ const UserProjects = () => {
 
                     </Row>
                     <Row>
-                        <Col md="12">
+                        <Col md="6">
                             <FormGroup>
                                 <label>Task Detail</label>
-                                <Input type="text" id="task_detail" value={state.task_detail} onChange={handleChange} />
-                            </FormGroup>
-                        </Col>
-                        <Col md="6">
-                            <FormGroup>
-                                <label>Start Time</label>
-                                <Input type="time" id="start_time" value={state.start_time} onChange={handleChange} />
-                            </FormGroup>
-                        </Col>
-                        <Col md="6">
-                            <FormGroup>
-                                <label>End Time</label>
-                                <Input type="time" id="end_time" value={state.end_time} onChange={handleChange} />
-                            </FormGroup>
-                        </Col>
-                        <Col md="6">
-                            <FormGroup>
-                                <label>Total Time</label>
-                                <Input type="time" id="total_time" value={state.total_time} onChange={handleChange} />
+                                <Input type="text" id="task_detail" value={taskDetail} onChange={(e) => (setTaskDetail(e.target.value))} />
                             </FormGroup>
                         </Col>
                         <Col md="6">
                             <FormGroup>
                                 <label>Task Date</label>
-                                <Input type="date" min={today} id="task_date" value={state.task_date} onChange={handleChange} />
+                                <Input type="date" min={today} id="task_date" value={taskdate} onChange={(e) => (setTaskdate(e.target.value))} />
                             </FormGroup>
                         </Col>
+                        <Col md="4">
+                            <FormGroup>
+                                <label>Start Time</label>
+                                <Input type="time" id="start_time" value={startTimeField} onChange={(e) => (setStartTimeField(e.target.value))} />
+                            </FormGroup>
+                        </Col>
+                        <Col md="4">
+                            <FormGroup>
+                                <label>End Time</label>
+                                <Input
+                                    type="time"
+                                    id="end_time"
+                                    value={endTimeField}
+                                    onChange={handleEndTime}
+                                    // onBlur={() => setEndDateB(true)}
+                                    onBlur={handleBlur}
+                                />
+                            </FormGroup>
+                        </Col>
+                        <Col md="4">
+                            <FormGroup>
+                                <label>Total Time</label>
+                                <Input type="text" id="total_time" value={taskTotalTime} readOnly />
+                            </FormGroup>
+                        </Col>
+
                         <Col md="12">
                             <FormGroup>
                                 <label>Comment </label>
                                 <Input
                                     type="textarea"
                                     id="comment"
-                                    value={state.comment} onChange={handleChange}
+                                    value={comment} onChange={(e) => (setComment(e.target.value))}
                                 />
                             </FormGroup>
                         </Col>
